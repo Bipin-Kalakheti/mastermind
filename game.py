@@ -2,7 +2,18 @@ import random
 
 COLORS = ["R", "G", "B", "Y", "W", "O"]
 TRIES = 10
-CODE_LENGTH = 4
+
+
+def difficulty_level():
+    level = input("Which level of difficulty you want to play on:\n1 for Easy\n2 for Medium\n3 for Hard\n")
+    if level == "1":
+        return 3
+    elif level == "3":
+        return 6
+
+    return 4
+
+CODE_LENGTH = difficulty_level()
 
 def generate_code():
     code = []
@@ -27,8 +38,7 @@ def guess_code():
                 break
             else:
                 break
-
-    return guess
+        return guess
 
 
 def check_code(guess, real_code):
@@ -43,7 +53,7 @@ def check_code(guess, real_code):
 
     for guess_color, real_color in zip(guess, real_code):
         if guess_color ==  real_color:
-            correct_pos += 1
+            correct_position += 1
             color_counts[guess_color] -= 1
 
     for guess_color, real_color in zip(guess, real_code):
@@ -70,7 +80,7 @@ def game():
         print(f"Correct Position: {correct_position} | Incorrect Position: {incorrect_position}")
 
     else:
-        print("You ran out of tries, the code was: ," *code)    
+        print("You ran out of tries, the code was: ", *code)    
 
 
 if __name__ == "__main__":
